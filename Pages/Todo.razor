@@ -1,0 +1,37 @@
+﻿@page "/todo"
+
+@*  <h3> header to show a count of the number of todo items that aren't complete (IsDone is false). *@
+<h3>Todo (@todos.Count(todo => !todo.IsDone))</h3>
+
+@* Add unordered list markup and a foreach loop to render each todo item as a list item (<li>). *@
+@* Add a field for the todo items in the @code block. The Todo component uses this field to maintain the state of the todo list. *@
+<ul>
+    @foreach (var todo in todos)
+    {
+        <input type="checkbox" @bind="todo.IsDone" />
+        @* Add a checkbox input type for each todo item and bind its value to the IsDone property *@
+        <input @bind="todo.Title" />
+    }
+</ul>
+
+@* Add a todo component and register the method using the onclick attribute;  bind newTodo with the @bind attribute *@
+<input type="text" placeholder="Something to do" @bind="newTodo">
+<button @onclick="AddTodo">Add todo</button>
+
+@code {
+    private List<TodoItem> todos = new();
+
+    @* Add a new todo string field to get the title of the new todo item *@
+    private string? newTodo;
+
+    @* Add an add to do method to be called when the button is clicked. *@
+    private void AddTodo(){
+        @* Todo: add the to do. *@
+        @* add the TodoItem with the specified title to the list. Clear the value of the text input by setting newTodo to an empty string: *@
+        if (!string.IsNullOrWhiteSpace(newTodo))
+        {
+            todos.Add(new TodoItem { Title = newTodo });
+            newTodo = string.Empty;
+        }
+    }
+}

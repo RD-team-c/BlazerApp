@@ -1,0 +1,18 @@
+﻿@page "/"
+
+<PageTitle>Index</PageTitle>
+
+<h1>@pageHeader</h1>
+
+<p>@welcomeMessage</p>
+
+<SurveyPrompt Title="How is Blazor working for you?" />
+
+<Counter IncrementAmount="10"/>
+
+<Todo/>
+
+@code{
+    private string welcomeMessage = "Welcome to your new app!";
+    private string pageHeader = "Blazer App";
+}
